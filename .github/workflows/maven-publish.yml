@@ -45,6 +45,9 @@ jobs:
     - name: Troubleshoot
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}"
 
+    - name: Log out
+      run: docker logout
+
     - name: Log into registry
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login index.docker.io -u brunopiqueras --password-stdin
 
