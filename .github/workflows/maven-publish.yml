@@ -43,7 +43,7 @@ jobs:
       run: docker logout
 
     - name: Log into registry
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login index.docker.io -u brunopiqueras --password-stdin
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u brunopiqueras --password-stdin
 
     - name: Build image
       run: cd spring-petclinic-server && mvn package docker:build
