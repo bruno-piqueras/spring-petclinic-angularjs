@@ -42,6 +42,9 @@ jobs:
     - name: Build image
       run: cd spring-petclinic-server && mvn package docker:build
 
+    - name: Troubleshoot
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}"
+
     - name: Log into registry
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login index.docker.io -u brunopiqueras --password-stdin
 
