@@ -55,6 +55,7 @@ jobs:
       run: |
         IMAGE_ID=brunopiqueras/$IMAGE_NAME
         docker images
+        echo $IMAGE_ID:$RELEASE_VERSION
         docker push $IMAGE_ID:$RELEASE_VERSION
         docker push $IMAGE_ID:latest
 
