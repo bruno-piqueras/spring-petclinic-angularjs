@@ -33,8 +33,16 @@ jobs:
 #      env:
 #        GITHUB_TOKEN: ${{ github.token }}
 #        
+    - name: Set Release version env variable
+      run: |
+      echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+
+    
+    - name: Build maven packages
+      run: ./mvnw clean install
+
     - name: Build image
-      run: ./mvnw clean install && cd spring-petclinic-server && mvn package docker:build
+      run: cd spring-petclinic-server && mvn package docker:build
 
     - name: Log into registry
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login index.docker.io -u brunopiqueras --password-stdin
@@ -43,21 +51,6 @@ jobs:
       run: |
         IMAGE_ID=index.docker.io/brunopiqueras/$IMAGE_NAME
 
-        # Change all uppercase to lowercase
-        IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
-        # Strip git ref prefix from version
-        VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-
-        # Strip "v" prefix from tag name
-        [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-
-        # Use Docker `latest` tag convention
-        [ "$VERSION" == "master" ] && VERSION=latest
-
-        echo IMAGE_ID=$IMAGE_ID
-        echo VERSION=$VERSION
-
-        docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-        docker push $IMAGE_ID:$VERSION
+        docker push $IMAGE_ID:$RELEASE_VERSION
+        docker push $IMAGE_ID:latest
 
