@@ -6,6 +6,7 @@
 		<groupId>org.springframework.samples</groupId>
 		<artifactId>spring-petclinic-angular1</artifactId>
 		<version>2.1.4</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>spring-petclinic-client</artifactId>
 	<name>Spring Petclinic :: AngularJS Client</name>
