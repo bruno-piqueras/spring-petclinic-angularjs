@@ -50,7 +50,7 @@ jobs:
 
     - name: Push image
       run: |
-        IMAGE_ID=index.docker.io/brunopiqueras/$IMAGE_NAME
+        IMAGE_ID=brunopiqueras/$IMAGE_NAME
 
         docker push $IMAGE_ID:$RELEASE_VERSION
         docker push $IMAGE_ID:latest
