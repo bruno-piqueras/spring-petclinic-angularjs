@@ -20,13 +20,13 @@
 	</modules>
 
 	<dependencyManagement>
-	<!--	<dependencies>
+		<dependencies>
 			<dependency>
 				<groupId>org.springframework.samples</groupId>
 				<artifactId>spring-petclinic-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-		</dependencies> -->
+		</dependencies> 
 	</dependencyManagement>
 
 	<build>
